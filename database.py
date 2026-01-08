@@ -56,7 +56,6 @@ class TaskDatabase:
         if conditions:
             query += " WHERE " + " AND ".join(conditions)
 
-        # Сортировка: Сначала активные, потом просроченные, в конце выполненные
         query += f""" ORDER BY CASE status 
             WHEN '{STATUS_PENDING}' THEN 0 
             WHEN '{STATUS_OVERDUE}' THEN 1 
@@ -74,7 +73,6 @@ class TaskDatabase:
         self.conn.commit()
 
     def update_task(self, tid, title, notes, deadline, status, category):
-        # Если задача не выполнена, перепроверяем дату на просрочку
         if status != STATUS_DONE:
             status = STATUS_OVERDUE if deadline < QDate.currentDate().toString("yyyy-MM-dd") else STATUS_PENDING
 

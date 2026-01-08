@@ -133,7 +133,6 @@ class ToDoApp(QWidget):
         self.theme_btn.clicked.connect(self.toggle_theme)
 
     def toggle_theme(self):
-        """Переключение темы"""
         self.is_dark_mode = not self.is_dark_mode
         self.apply_theme()
 
@@ -147,7 +146,6 @@ class ToDoApp(QWidget):
     def apply_theme(self):
         """Применение глобальных стилей"""
         app_style = DARK_THEME if self.is_dark_mode else LIGHT_THEME
-        # Применяем стиль ко всему приложению (включая диалоговые окна)
         QApplication.instance().setStyleSheet(app_style)
 
         # Восстанавливаем специальные цвета кнопок (они могли сброситься)
@@ -190,7 +188,6 @@ class ToDoApp(QWidget):
             category = category if category else "Без категории"
 
             item = QListWidgetItem(self.task_list_widget)
-            # ПЕРЕДАЕМ ТЕКУЩУЮ ТЕМУ В ВИДЖЕТ
             custom_widget = TaskWidget(title, notes, deadline, status, category, item.isSelected(), self.is_dark_mode)
             item.setSizeHint(custom_widget.sizeHint())
             item.setData(Qt.ItemDataRole.UserRole, tid)
@@ -207,7 +204,6 @@ class ToDoApp(QWidget):
             item = self.task_list_widget.item(i)
             widget = self.task_list_widget.itemWidget(item)
             if widget:
-                # При обновлении выделения важно сохранить текущую тему
                 widget.set_theme(self.is_dark_mode)
                 widget.is_selected = item.isSelected()
                 widget.update_style()

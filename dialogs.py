@@ -6,7 +6,6 @@ from database import ADD_NEW_CAT_TEXT
 
 
 class TaskDialog(QDialog):
-    """Окно создания и редактирования задачи"""
 
     def __init__(self, available_categories, title="", notes="", deadline=None, category=None, parent=None):
         super().__init__(parent)

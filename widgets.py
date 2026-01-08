@@ -54,7 +54,6 @@ class TaskWidget(QFrame):
         self.update_style()
 
     def set_theme(self, is_dark):
-        """Метод для переключения темы на лету"""
         self.is_dark_mode = is_dark
         # Обновляем цвета текста
         text_color = "#e0e0e0" if is_dark else "black"
@@ -68,15 +67,14 @@ class TaskWidget(QFrame):
         self.update_style()
 
     def update_style(self):
-        # Палитра цветов (Светлая / Темная)
         if self.current_status == STATUS_DONE:
-            bg_color = "#1e3a2a" if self.is_dark_mode else "#d1e7dd"  # Темно-зеленый / Светло-зеленый
+            bg_color = "#1e3a2a" if self.is_dark_mode else "#d1e7dd"
             border_base = "#2f5c40" if self.is_dark_mode else "#badbcc"
         elif self.current_status == STATUS_OVERDUE:
-            bg_color = "#4a1e1e" if self.is_dark_mode else "#f8d7da"  # Темно-красный / Светло-красный
+            bg_color = "#4a1e1e" if self.is_dark_mode else "#f8d7da"
             border_base = "#6b2b2b" if self.is_dark_mode else "#f5c6cb"
         else:
-            bg_color = "#2d2d2d" if self.is_dark_mode else "#ffffff"  # Темно-серый / Белый
+            bg_color = "#2d2d2d" if self.is_dark_mode else "#ffffff"
             border_base = "#444444" if self.is_dark_mode else "#cccccc"
 
         border_color = "#4a90e2" if self.is_selected else border_base
