@@ -2,7 +2,6 @@ import sqlite3
 from datetime import datetime
 from PyQt6.QtCore import QDate
 
-# Константы
 STATUS_PENDING = "Не выполнено"
 STATUS_DONE = "Выполнено"
 STATUS_OVERDUE = "Просрочено"
@@ -27,14 +26,12 @@ class TaskDatabase:
         self.conn.commit()
 
     def update_overdue_statuses(self):
-        """Обновляет статусы просроченных задач"""
         today = QDate.currentDate().toString("yyyy-MM-dd")
         self.cursor.execute("UPDATE tasks SET status = ? WHERE status != ? AND deadline < ?",
                             (STATUS_OVERDUE, STATUS_DONE, today))
         self.conn.commit()
 
     def get_tasks(self, category_filter=None, status_filter=None, search_text=None):
-        """Получает задачи с учетом фильтров и сортировки"""
         self.update_overdue_statuses()
 
         query = "SELECT id, title, notes, deadline, status, category FROM tasks"

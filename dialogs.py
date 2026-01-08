@@ -66,7 +66,6 @@ class TaskDialog(QDialog):
 
 
 class StatsDialog(QDialog):
-    """Окно статистики"""
 
     def __init__(self, db, parent=None):
         super().__init__(parent)

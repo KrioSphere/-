@@ -12,7 +12,6 @@ from database import TaskDatabase, STATUS_PENDING, STATUS_DONE, STATUS_OVERDUE
 from widgets import TaskWidget
 from dialogs import TaskDialog, StatsDialog
 
-# --- ГЛОБАЛЬНЫЕ СТИЛИ (QSS) ---
 LIGHT_THEME = """
     QWidget { background-color: #f0f2f5; color: #000000; }
     QLineEdit, QTextEdit, QComboBox, QDateEdit { 
@@ -46,7 +45,6 @@ class ToDoApp(QWidget):
         self.init_ui()
         self.load_tasks()
 
-        # Устанавливаем начальную тему
         self.apply_theme()
 
     def init_ui(self):
@@ -57,22 +55,19 @@ class ToDoApp(QWidget):
         self.title_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.title_label.setStyleSheet("font-size: 22px; font-weight: bold; margin: 10px;")
 
-        # --- ВЕРХНЕЕ МЕНЮ ---
         top_menu_layout = QHBoxLayout()
         self.theme_btn = QPushButton("🌓 Тема")
         self.stats_btn = QPushButton("📊 Статистика")
         self.export_btn = QPushButton("💾 Экспорт")
 
-        # У кнопок меню свой особый стиль, чтобы они выделялись
         top_menu_layout.addWidget(self.theme_btn)
         top_menu_layout.addWidget(self.stats_btn)
         top_menu_layout.addWidget(self.export_btn)
 
-        # --- ПОИСК ---
         self.search_input = QLineEdit()
         self.search_input.setPlaceholderText("🔍 Поиск по названию...")
 
-        # --- ФИЛЬТРЫ ---
+
         self.filter_layout = QHBoxLayout()
         self.cat_filter = QComboBox()
 
@@ -87,22 +82,18 @@ class ToDoApp(QWidget):
         self.filter_layout.addWidget(self.status_filter)
         self.filter_layout.addWidget(self.reset_filter_btn)
 
-        # СПИСОК
         self.task_list_widget = QListWidget()
         self.task_list_widget.setSpacing(8)
 
-        # КНОПКИ УПРАВЛЕНИЯ
+
         self.add_btn = QPushButton("+ Создать задачу")
-        # Стиль кнопки создания всегда синий, переопределяем глобальный
         self.add_btn.setStyleSheet(
             "background-color: #007bff; color: white; font-weight: bold; padding: 12px; border-radius: 8px;")
 
         self.complete_btn = QPushButton("Выполнить / Вернуть")
         self.remove_btn = QPushButton("Удалить выбранное")
-        # Стиль кнопки удаления переопределяем (красноватый)
         self.remove_btn.setStyleSheet("background-color: #842029; color: white; padding: 8px; border-radius: 5px;")
 
-        # КОМПОНОВКА
         layout = QVBoxLayout(self)
         layout.addLayout(top_menu_layout)
         layout.addWidget(self.title_label)
@@ -116,7 +107,6 @@ class ToDoApp(QWidget):
         btns_layout.addWidget(self.remove_btn)
         layout.addLayout(btns_layout)
 
-        # СИГНАЛЫ
         self.add_btn.clicked.connect(self.open_add_dialog)
         self.complete_btn.clicked.connect(self.toggle_task_status)
         self.remove_btn.clicked.connect(self.remove_task)
@@ -136,7 +126,6 @@ class ToDoApp(QWidget):
         self.is_dark_mode = not self.is_dark_mode
         self.apply_theme()
 
-        # Обновляем все виджеты задач в списке
         for i in range(self.task_list_widget.count()):
             item = self.task_list_widget.item(i)
             widget = self.task_list_widget.itemWidget(item)
@@ -144,11 +133,9 @@ class ToDoApp(QWidget):
                 widget.set_theme(self.is_dark_mode)
 
     def apply_theme(self):
-        """Применение глобальных стилей"""
         app_style = DARK_THEME if self.is_dark_mode else LIGHT_THEME
         QApplication.instance().setStyleSheet(app_style)
 
-        # Восстанавливаем специальные цвета кнопок (они могли сброситься)
         self.add_btn.setStyleSheet(
             "background-color: #007bff; color: white; font-weight: bold; padding: 12px; border-radius: 8px;")
 

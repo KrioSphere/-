@@ -3,7 +3,6 @@ from database import STATUS_DONE, STATUS_OVERDUE
 
 
 class TaskWidget(QFrame):
-    """Виджет отдельной плитки задачи с поддержкой тем"""
 
     def __init__(self, title, notes, deadline, status, category, is_selected=False, is_dark_mode=False, parent=None):
         super().__init__(parent)
@@ -34,7 +33,6 @@ class TaskWidget(QFrame):
 
         icon = "✅" if status == STATUS_DONE else ("❌" if status == STATUS_OVERDUE else "⏳")
 
-        # Цвет текста зависит от темы
         text_color = "#e0e0e0" if is_dark_mode else "black"
         subtext_color = "#aaaaaa" if is_dark_mode else "#666666"
 
