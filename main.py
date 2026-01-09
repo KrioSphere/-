@@ -21,6 +21,7 @@ LIGHT_THEME = """
     QPushButton { background-color: #e0e0e0; border: 1px solid #ccc; border-radius: 5px; padding: 5px; }
     QPushButton:hover { background-color: #d0d0d0; }
     QDialog { background-color: #ffffff; }
+    QLabel { background-color: transparent; }
 """
 
 DARK_THEME = """
@@ -33,7 +34,10 @@ DARK_THEME = """
     QPushButton:hover { background-color: #444444; }
     QDialog { background-color: #1e1e1e; }
     QMessageBox { background-color: #1e1e1e; color: white; }
-    QLabel { color: #e0e0e0; }
+    QLabel { 
+        color: #e0e0e0; 
+        background-color: transparent;
+    }
 """
 
 
