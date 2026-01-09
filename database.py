@@ -11,7 +11,7 @@ ADD_NEW_CAT_TEXT = "➕ Своя категория..."
 
 
 class TaskDatabase:
-    def __init__(self, db_name="tasks_v2.db"):
+    def __init__(self, db_name="tasks_v2.sqlite"):  #
         self.conn = sqlite3.connect(db_name)
         self.cursor = self.conn.cursor()
         self.init_db()
